@@ -4837,7 +4837,7 @@ final class SdltFormpRepositorySpec extends SpecBase with SdltFormpRepoDataHelpe
 
   "sdltResetGovTalkStatus" - {
 
-    "call SUBMISSION_ADMIN.ResetGovTalkStatus with old and new protocol statuses" in {
+    "call SUBMISSION_ADMIN.ResetGovTalkStatusRecord with old and new protocol statuses" in {
       val db   = mock[Database]
       val conn = mock[Connection]
       val cs   = mock[CallableStatement]
@@ -4846,7 +4846,9 @@ final class SdltFormpRepositorySpec extends SpecBase with SdltFormpRepoDataHelpe
         val f = inv.getArgument(0, classOf[Connection => Any]); f(conn)
       }
 
-      when(conn.prepareCall(eqTo("{ call SUBMISSION_ADMIN.ResetGovTalkStatus(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }")))
+      when(
+        conn.prepareCall(eqTo("{ call SUBMISSION_ADMIN.ResetGovTalkStatusRecord(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }"))
+      )
         .thenReturn(cs)
 
       val repo = new SdltFormpRepository(db)
@@ -4872,7 +4874,7 @@ final class SdltFormpRepositorySpec extends SpecBase with SdltFormpRepoDataHelpe
 
       result.success mustBe true
 
-      verify(conn).prepareCall("{ call SUBMISSION_ADMIN.ResetGovTalkStatus(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }")
+      verify(conn).prepareCall("{ call SUBMISSION_ADMIN.ResetGovTalkStatusRecord(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }")
       verify(cs).setString(1, "STORN12345")
       verify(cs).setString(2, "SUB123")
       verify(cs).setString(3, "CORR-XYZ")

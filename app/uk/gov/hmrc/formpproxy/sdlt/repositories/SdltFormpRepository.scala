@@ -2808,7 +2808,7 @@ class SdltFormpRepository @Inject() (@NamedDatabase("sdlt") db: Database)(implic
     p_protocol_status_new: String,
     p_gatewayurl: String
   ): GovTalkStatusReturn = {
-    val cs = conn.prepareCall("{ call SUBMISSION_ADMIN.ResetGovTalkStatus(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }")
+    val cs = conn.prepareCall("{ call SUBMISSION_ADMIN.ResetGovTalkStatusRecord(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }")
     try {
       cs.setString(1, p_user_identifier)
       cs.setString(2, p_formResultId)
