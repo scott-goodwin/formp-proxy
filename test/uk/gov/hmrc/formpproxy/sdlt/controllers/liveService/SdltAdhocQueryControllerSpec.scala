@@ -185,20 +185,20 @@ class SdltAdhocQueryControllerSpec extends AnyFreeSpec with Matchers with ScalaF
   }
 
   private class FakeStrideAuthAction(
-                                      parser: BodyParsers.Default,
-                                      authConnector: AuthConnector,
-                                      result: Option[Result]
-                                    )(implicit ec: ExecutionContext)
-    extends StrideAuthAction(Seq("sdlt_adhoc_query"), authConnector, parser) {
+    parser: BodyParsers.Default,
+    authConnector: AuthConnector,
+    result: Option[Result]
+  )(implicit ec: ExecutionContext)
+      extends StrideAuthAction(Seq("sdlt_adhoc_query"), authConnector, parser) {
 
     override def invokeBlock[A](request: Request[A], block: StrideRequest[A] => Future[Result]): Future[Result] =
       result.fold(block(StrideRequest("stride-user-123", Set("sdlt_adhoc_query"), request)))(Future.successful)
   }
 
   private trait Setup {
-    implicit val ec: ExecutionContext            = scala.concurrent.ExecutionContext.global
-    private val cc: ControllerComponents         = stubControllerComponents()
-    private val parser: BodyParsers.Default      = new BodyParsers.Default(cc.parsers)
+    implicit val ec: ExecutionContext       = scala.concurrent.ExecutionContext.global
+    private val cc: ControllerComponents    = stubControllerComponents()
+    private val parser: BodyParsers.Default = new BodyParsers.Default(cc.parsers)
 
     def strideResult: Option[Result] = None
 

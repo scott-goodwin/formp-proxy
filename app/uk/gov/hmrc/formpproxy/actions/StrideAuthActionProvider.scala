@@ -14,10 +14,10 @@ import scala.concurrent.ExecutionContext
 
 @Singleton
 class StrideAuthActionProvider @Inject() (
-                                           authConnector: AuthConnector,
-                                           parser: BodyParsers.Default,
-                                           config: Configuration
-                                         )(implicit ec: ExecutionContext) {
+  authConnector: AuthConnector,
+  parser: BodyParsers.Default,
+  config: Configuration
+)(implicit ec: ExecutionContext) {
 
   lazy val sdltAdhocQuery: StrideAuthAction =
     new StrideAuthAction(config.get[Seq[String]]("stride.roles.sdltAdhocQuery"), authConnector, parser)

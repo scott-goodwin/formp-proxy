@@ -21,11 +21,11 @@ import uk.gov.hmrc.play.http.HeaderCarrierConverter
 import scala.concurrent.{ExecutionContext, Future}
 
 class StrideAuthAction(
-                        roles: Seq[String],
-                        val authConnector: AuthConnector,
-                        val parser: BodyParsers.Default
-                      )(implicit val executionContext: ExecutionContext)
-  extends ActionBuilder[StrideRequest, AnyContent]
+  roles: Seq[String],
+  val authConnector: AuthConnector,
+  val parser: BodyParsers.Default
+)(implicit val executionContext: ExecutionContext)
+    extends ActionBuilder[StrideRequest, AnyContent]
     with AuthorisedFunctions
     with Logging {
 

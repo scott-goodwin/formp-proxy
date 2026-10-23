@@ -29,11 +29,11 @@ import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class SdltAdhocQueryController @Inject() (
-                                           repo: SdltAdhocQueryRepository,
-                                           strideAuth: StrideAuthActionProvider,
-                                           cc: ControllerComponents
-                                         )(implicit ec: ExecutionContext)
-  extends BackendController(cc)
+  repo: SdltAdhocQueryRepository,
+  strideAuth: StrideAuthActionProvider,
+  cc: ControllerComponents
+)(implicit ec: ExecutionContext)
+    extends BackendController(cc)
     with Logging {
 
   def run(): Action[JsValue] = strideAuth.sdltAdhocQuery.async(parse.json) { request =>
